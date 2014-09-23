@@ -72,7 +72,7 @@ class FileRepositoryTest extends \PHPUnit_Framework_TestCase {
 
         $config->shouldReceive('set')
             ->once()
-            ->with('elepunk/evaluator::expressions', $newStub);
+            ->with('elepunk/evaluator::expressions.foobar', $newStub);
 
         $repository->add('foobar', 'bar > baz');
 
