@@ -1,9 +1,8 @@
 Evaluator
 ==============
 
-[![Build Status](https://scrutinizer-ci.com/g/elepunk/evaluator/badges/build.png?b=master)](https://scrutinizer-ci.com/g/elepunk/evaluator/build-status/master)
+[![Build Status](https://travis-ci.org/elepunk/orchestrate.svg?branch=master)](https://travis-ci.org/elepunk/orchestrate)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/elepunk/evaluator/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/elepunk/evaluator/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/elepunk/evaluator/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/elepunk/evaluator/?branch=master)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/6dda2ef1-b8fb-403f-a9c3-f01d1623aa6c/mini.png)](https://insight.sensiolabs.com/projects/6dda2ef1-b8fb-403f-a9c3-f01d1623aa6c)
 
 A laravel package and orchestra extension for [symfony/expression-language](http://symfony.com/doc/current/components/expression_language/index.html) component.
