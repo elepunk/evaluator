@@ -34,4 +34,4 @@ interface RepositoryInterface {
      */
     public function add($key, $expression);
 
-} 
+}

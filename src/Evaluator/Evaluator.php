@@ -61,4 +61,4 @@ class Evaluator {
         return $this->repository;
     }
 
-} 
+}
