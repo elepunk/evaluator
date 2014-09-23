@@ -67,7 +67,7 @@ class MemoryRepository implements RepositoryInterface {
      */
     public function add($key, $expression)
     {
-        $this->expressions = Arr::add($this->expressions, $key, $expression);
+        Arr::set($this->expressions, $key, $expression);
 
         $this->memory->put("elepunk_evaluator_expressions", $this->expressions);
     }

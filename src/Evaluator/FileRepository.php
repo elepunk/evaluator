@@ -63,9 +63,9 @@ class FileRepository implements RepositoryInterface {
      */
     public function add($key, $expression)
     {
-        $this->expressions = Arr::add($this->expressions, $key, $expression);
+        Arr::set($this->expressions, $key, $expression);
 
-        $this->config->set("elepunk/evaluator::expressions", $this->expressions);
+        $this->config->set("elepunk/evaluator::expressions.{$key}", $this->expressions);
     }
 
 }
