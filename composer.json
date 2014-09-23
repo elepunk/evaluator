@@ -5,7 +5,8 @@
     "require-dev": {
         "mockery/mockery": "~0.9",
         "illuminate/support": "4.2.*",
-        "illuminate/config": "4.2.*"
+        "illuminate/config": "4.2.*",
+        "orchestra/memory": "2.2.*"
     },
     "autoload": {
         "psr-4": {

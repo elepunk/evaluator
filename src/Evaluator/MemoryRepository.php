@@ -4,12 +4,12 @@ use \Exception;
 use Illuminate\Support\Arr;
 use Elepunk\Evaluator\Contracts\RepositoryInterface;
 
-class FileRepository implements RepositoryInterface {
+class MemoryRepository implements RepositoryInterface {
 
     /**
-     * @var \Illuminate\Config\Repository
+     * @var \Orchestra\Memory\Provider
      */
-    protected $config;
+    protected $memory;
 
     /**
      * @var array
@@ -19,11 +19,11 @@ class FileRepository implements RepositoryInterface {
     /**
      * Construct new FileRepository instance
      *
-     * @param \Illuminate\Config\Repository $config
+     * @param \Orchestra\Memory\Provider $memory
      */
-    public function __construct($config)
+    public function __construct($memory)
     {
-        $this->config = $config;
+        $this->memory = $memory;
     }
 
     /**
@@ -31,7 +31,11 @@ class FileRepository implements RepositoryInterface {
      */
     public function load()
     {
-        $expressions = $this->config->get('elepunk/evaluator::expressions', []);
+        $expressions = $this->memory->get('elepunk_evaluator_expressions', []);
+
+        if (empty($expressions)) {
+            $this->memory->put('elepunk_evaluator_expressions', $expressions);
+        }
 
         $this->expressions = $expressions;
     }
@@ -65,7 +69,7 @@ class FileRepository implements RepositoryInterface {
     {
         $this->expressions = Arr::add($this->expressions, $key, $expression);
 
-        $this->config->set("elepunk/evaluator::expressions", $this->expressions);
+        $this->memory->put("elepunk_evaluator_expressions", $this->expressions);
     }
 
 }

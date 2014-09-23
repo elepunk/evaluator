@@ -32,6 +32,6 @@ interface RepositoryInterface {
      * @param string $expression
      * @return void
      */
-    public function put($key, $expression);
+    public function add($key, $expression);
 
 } 

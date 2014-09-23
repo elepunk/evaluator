@@ -13,29 +13,48 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase {
     public function testEvaluateMethod()
     {
         $stub = [
-            'foo' => 20,
-            'bar' => 10
+            'bar' => 20,
+            'baz' => 10
         ];
 
-        $expression = m::mock('Symfony\Component\ExpressionLanguage\ExpressionLanguage');
-        $repository = m::mock('Elepunk\Evaluator\Contracts\RepositoryInterface');
-
+        list($expression, $repository) = $this->getMocks();
         $evaluator = new Evaluator($expression, $repository);
 
-        $repository->shouldReceive('get')->once()->with('foo')->andReturn($e = 'foo > bar');
-        $expression->shouldReceive('evaluate')->once()->with($e, $stub)->andReturn(true);
+        $repository->shouldReceive('get')
+            ->once()
+            ->with('foo')
+            ->andReturn($e = 'bar > baz');
+
+        $expression->shouldReceive('evaluate')
+            ->once()
+            ->with($e, $stub)
+            ->andReturn(true);
 
         $this->assertTrue($evaluator->evaluate('foo', $stub));
     }
 
     public function testExpressionEngineMethod()
     {
-        $expression = m::mock('Symfony\Component\ExpressionLanguage\ExpressionLanguage');
-        $repository = m::mock('Elepunk\Evaluator\Contracts\RepositoryInterface');
-
+        list($expression, $repository) = $this->getMocks();
         $evaluator = new Evaluator($expression, $repository);
 
         $this->assertInstanceOf('Symfony\Component\ExpressionLanguage\ExpressionLanguage', $evaluator->expressionEngine());
+    }
+
+    public function testRepositoryMethod()
+    {
+        list($expression, $repository) = $this->getMocks();
+        $evaluator = new Evaluator($expression, $repository);
+
+        $this->assertInstanceOf('Elepunk\Evaluator\Contracts\RepositoryInterface', $evaluator->repository());
+    }
+
+    protected function getMocks()
+    {
+        $expression = m::mock('\Symfony\Component\ExpressionLanguage\ExpressionLanguage');
+        $repository = m::mock('\Elepunk\Evaluator\Contracts\RepositoryInterface');
+
+        return [$expression, $repository];
     }
 
 }

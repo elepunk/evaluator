@@ -10,26 +10,37 @@ class FileRepositoryTest extends \PHPUnit_Framework_TestCase {
         m::close();
     }
 
-    public function testDumpMethod()
+    public function testLoadAndDumpMethod()
     {
-        $stub = [
-            'foo' => 'foobar > bar'
-        ];
+        list($repository, $config) = $this->getRepository();
+        $stub = ['foo' => 'bar == baz'];
 
-        $repository = new FileRepository($stub);
+        $this->assertNull($repository->dump());
+
+        $config->shouldReceive('get')
+            ->once()
+            ->with('elepunk/evaluator::expressions', [])
+            ->andReturn($stub);
+
+        $repository->load();
 
         $this->assertEquals($stub, $repository->dump());
     }
 
     public function testGetMethod()
     {
-        $stub = [
-            'foo' => 'foobar > bar'
-        ];
+        list($repository, $config) = $this->getRepository();
 
-        $repository = new FileRepository($stub);
+        $stub = ['foo' => 'bar == baz'];
 
-        $this->assertEquals('foobar > bar', $repository->get('foo'));
+        $config->shouldReceive('get')
+            ->once()
+            ->with('elepunk/evaluator::expressions', [])
+            ->andReturn($stub);
+
+        $repository->load();
+
+        $this->assertEquals('bar == baz', $repository->get('foo'));
     }
 
     /**
@@ -37,13 +48,43 @@ class FileRepositoryTest extends \PHPUnit_Framework_TestCase {
      */
     public function testGetMethodThrowException()
     {
-        $stub = [
-            'foo' => 'foobar > bar'
+        list($repository, $config) = $this->getRepository();
+
+        $repository->get('foo');
+    }
+
+    public function testAddMethod()
+    {
+        list($repository, $config) = $this->getRepository();
+
+        $stub = ['foo' => 'bar == baz'];
+        $newStub = [
+            'foo' => 'bar == baz',
+            'foobar' => 'bar > baz'
         ];
 
-        $repository = new FileRepository($stub);
+        $config->shouldReceive('get')
+            ->once()
+            ->with('elepunk/evaluator::expressions', [])
+            ->andReturn($stub);
 
-        $repository->get('foobar');
+        $repository->load();
+
+        $config->shouldReceive('set')
+            ->once()
+            ->with('elepunk/evaluator::expressions', $newStub);
+
+        $repository->add('foobar', 'bar > baz');
+
+        $this->assertEquals('bar > baz', $repository->get('foobar'));
+    }
+
+    protected function getRepository()
+    {
+        $config = m::mock('\Illuminate\Config\Repository');
+        $repository = new FileRepository($config);
+
+        return [$repository, $config];
     }
 
 }

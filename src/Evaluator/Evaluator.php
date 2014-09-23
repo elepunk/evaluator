@@ -6,18 +6,20 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 class Evaluator {
 
     /**
-     * @var ExpressionLanguage
+     * @var \Symfony\Component\ExpressionLanguage\ExpressionLanguage
      */
     protected $expressionEngine;
 
     /**
-     * @var RepositoryInterface
+     * @var \Elepunk\Evaluator\Contracts\RepositoryInterface
      */
     protected $repository;
 
     /**
-     * @param ExpressionLanguage $expressionEngine
-     * @param RepositoryInterface $repository
+     * Construct new Evaluator instance
+     *
+     * @param \Symfony\Component\ExpressionLanguage\ExpressionLanguage $expressionEngine
+     * @param \Elepunk\Evaluator\Contracts\RepositoryInterface $repository
      */
     public function __construct(ExpressionLanguage $expressionEngine, RepositoryInterface $repository)
     {
@@ -26,9 +28,11 @@ class Evaluator {
     }
 
     /**
-     * @param $expressionKey
-     * @param $input
-     * @return string
+     * Evaluate the expression
+     *
+     * @param string $expressionKey
+     * @param mixed $input
+     * @return bool|integer
      */
     public function evaluate($expressionKey, $input)
     {
@@ -38,11 +42,23 @@ class Evaluator {
     }
 
     /**
-     * @return ExpressionLanguage
+     * Get ExpressionLanguage instance
+     *
+     * @return \Symfony\Component\ExpressionLanguage\ExpressionLanguage
      */
     public function expressionEngine()
     {
         return $this->expressionEngine;
+    }
+
+    /**
+     * Get RepositoryInterface instance
+     *
+     * @return \Elepunk\Evaluator\Contracts\RepositoryInterface
+     */
+    public function repository()
+    {
+        return $this->repository;
     }
 
 } 

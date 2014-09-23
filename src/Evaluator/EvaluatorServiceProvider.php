@@ -5,12 +5,9 @@ use Illuminate\Support\ServiceProvider;
 class EvaluatorServiceProvider extends ServiceProvider {
 
     /**
-     * @var bool
-     */
-    protected $defer = true;
-
-    /**
+     * Register the service provider
      *
+     * @return void
      */
     public function register()
     {
@@ -20,7 +17,9 @@ class EvaluatorServiceProvider extends ServiceProvider {
     }
 
     /**
+     * Bootstrap application events
      *
+     * @return void
      */
     public function boot()
     {
@@ -32,12 +31,14 @@ class EvaluatorServiceProvider extends ServiceProvider {
     }
 
     /**
+     * Load available expressions
      *
+     * @return void
      */
     protected function loadExpresssions()
     {
         $this->app->before(function () {
-            $this->app['elepunk.']->repository()->load();
+            $this->app['elepunk.evaluator']->repository()->load();
         });
     }
 
