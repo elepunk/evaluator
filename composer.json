@@ -1,0 +1,15 @@
+{
+    "require": {
+        "symfony/expression-language": "2.5.*"
+    },
+    "require-dev": {
+        "mockery/mockery": "~0.9",
+        "illuminate/support": "4.2.*",
+        "illuminate/config": "4.2.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Elepunk\\Evaluator\\": "src/Evaluator/"
+        }
+    }
+}
