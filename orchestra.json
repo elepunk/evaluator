@@ -1,0 +1,10 @@
+{
+    "name": "Elepunk Evaluator",
+    "description": "Symfony expression language component extension for Orchestra Platform",
+    "author": "Ahmad Shah Hafizan Hamidin",
+    "url": "https://github.com/elepunk/evaluator",
+    "version": "0.1-dev",
+    "provide": [
+        "Elepunk\\Evaluator\\EvaluatorServiceProvider"
+    ]
+}
