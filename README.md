@@ -3,6 +3,7 @@ Evaluator
 
 [![Build Status](https://travis-ci.org/elepunk/evaluator.svg?branch=master)](https://travis-ci.org/elepunk/evaluator)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/elepunk/evaluator/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/elepunk/evaluator/?branch=master)
+[![Coverage Status](https://coveralls.io/repos/elepunk/evaluator/badge.png)](https://coveralls.io/r/elepunk/evaluator)
 [![Latest Unstable Version](https://poser.pugx.org/elepunk/evaluator/v/unstable.svg)](//packagist.org/packages/elepunk/evaluator)
 [![License](https://poser.pugx.org/elepunk/evaluator/license.svg)](https://packagist.org/packages/elepunk/evaluator)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/6dda2ef1-b8fb-403f-a9c3-f01d1623aa6c/mini.png)](https://insight.sensiolabs.com/projects/6dda2ef1-b8fb-403f-a9c3-f01d1623aa6c)

@@ -18,9 +18,10 @@
     </testsuites>
 
     <logging>
-        <log type="coverage-html" target="build" title="media"
+        <log type="coverage-html" target="build/html" title="media"
              charset="UTF-8" yui="true" highlight="true"
              lowUpperBound="35" highLowerBound="70"/>
+        <log type="coverage-clover" target="build/logs/clover.xml"/>
     </logging>
 
     <filter>
