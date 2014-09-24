@@ -13,14 +13,8 @@ To install simply add into your ```composer.json``` file.
 
 ```json
 {
-    "repositories": [
-            {
-                "type": "git",
-                "url": "https://github.com/elepunk/evaluator"
-            }
-    ],
     "require": {
-        "elepunk/evaluator": "dev-master"
+        "elepunk/evaluator": "0.1.*@dev"
     }
 }
 ```
