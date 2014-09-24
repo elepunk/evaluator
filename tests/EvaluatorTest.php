@@ -33,6 +33,75 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase {
         $this->assertTrue($evaluator->evaluate('foo', $stub));
     }
 
+    /**
+     * @expectedException \LogicException
+     */
+    public function testIfTrueMethodThrowException()
+    {
+        list($expression, $repository) = $this->getMocks();
+        $evaluator = new Evaluator($expression, $repository);
+
+        $stub = [
+            'bar' => 20,
+            'baz' => 10
+        ];
+
+        $repository->shouldReceive('get')
+            ->once()
+            ->with('foo')
+            ->andReturn($e = 'bar + baz');
+
+        $expression->shouldReceive('evaluate')
+            ->once()
+            ->with($e, $stub)
+            ->andReturn(30);
+
+        $callback = function ($s) {
+            return $s;
+        };
+
+        $evaluator->ifTrue('foo', $stub, $callback);
+    }
+
+    public function testIfTrueMethod()
+    {
+        list($expression, $repository) = $this->getMocks();
+        $evaluator = new Evaluator($expression, $repository);
+
+        $stub = [
+            'bar' => 20,
+            'baz' => 10
+        ];
+
+        $repository->shouldReceive('get')
+            ->once()
+            ->with('foo')
+            ->andReturn($e = 'bar > baz');
+
+        $expression->shouldReceive('evaluate')
+            ->once()
+            ->with($e, $stub)
+            ->andReturn(true);
+
+        $callback = function ($s) {
+            return $s;
+        };
+
+        $this->assertEquals($stub, $evaluator->ifTrue('foo', $stub, $callback));
+
+        $repository->shouldReceive('get')
+            ->once()
+            ->with('foobar')
+            ->andReturn($e = 'bar < baz');
+
+        $expression->shouldReceive('evaluate')
+            ->once()
+            ->with($e, $stub)
+            ->andReturn(false);
+
+        $this->assertFalse($evaluator->ifTrue('foobar', $stub, $callback));
+    }
+
     public function testExpressionEngineMethod()
     {
         list($expression, $repository) = $this->getMocks();

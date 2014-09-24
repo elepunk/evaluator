@@ -7,7 +7,7 @@ Evaluator
 [![License](https://poser.pugx.org/elepunk/evaluator/license.svg)](https://packagist.org/packages/elepunk/evaluator)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/6dda2ef1-b8fb-403f-a9c3-f01d1623aa6c/mini.png)](https://insight.sensiolabs.com/projects/6dda2ef1-b8fb-403f-a9c3-f01d1623aa6c)
 
-A laravel package and orchestra extension for [symfony/expression-language](http://symfony.com/doc/current/components/expression_language/index.html) component.
+A Laravel package and Orchestra extension for [symfony/expression-language](http://symfony.com/doc/current/components/expression_language/index.html) component.
 
 ## Installation
 
@@ -83,7 +83,15 @@ $test = [
     'bar' => 5
 ];
 
-echo Evaluator::evaluate('test', $test); //this will retun true
+echo Evaluator::evaluate('test', $test); //this will return true
+```
+
+You can also specify a callback when the it passes the evaluation
+
+```php
+Evaluator::ifTrue('test', $test, function ($t) {
+   ...
+});
 ```
 
 For supported expressions, visit the [Symfony Expression Language Component](http://symfony.com/doc/current/components/expression_language/index.html).

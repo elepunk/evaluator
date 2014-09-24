@@ -1,5 +1,7 @@
 <?php namespace Elepunk\Evaluator;
 
+use \Closure;
+use \LogicException;
 use Elepunk\Evaluator\Contracts\RepositoryInterface;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
@@ -39,6 +41,30 @@ class Evaluator {
         $expression = $this->repository->get($expressionKey);
 
         return $this->expressionEngine->evaluate($expression, $input);
+    }
+
+    /**
+     * Run action if passes evaluation
+     *
+     * @param string $expressionKey
+     * @param string $input
+     * @param callable $callback
+     * @return mixed
+     * @throws \LogicException
+     */
+    public function ifTrue($expressionKey, $input, Closure $callback)
+    {
+        $evaluate = $this->evaluate($expressionKey, $input);
+
+        if ( ! is_bool($evaluate)) {
+            throw new LogicException("Expression should only return true or false");
+        }
+
+        if ($evaluate) {
+            return call_user_func($callback, $input);
+        }
+
+        return $evaluate;
     }
 
     /**
