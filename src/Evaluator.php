@@ -91,6 +91,7 @@ class Evaluator implements EvaluatorInterface
         }
 
         $result = $this->calculate($expression, $collection);
+        $collection->setCalculatedValue($result);
         $collection->put($expression->target, $result);
 
         if ( ! is_null($callback)) {
@@ -110,6 +111,8 @@ class Evaluator implements EvaluatorInterface
     protected function calculate(Fluent $expression, Collection $item)
     {
         $target = $item->get($expression->target);
+        $item->setOriginalValue($target);
+
         $action = $expression->action;
 
         $operator = $this->getArithmeticOperator($action);
@@ -122,12 +125,12 @@ class Evaluator implements EvaluatorInterface
             ]);
         }
         
-        $calculation = $this->evaluate("first {$operator} second", [
+        $calculated = $this->evaluate("first {$operator} second", [
             'first' => $target, 
             'second' => $value
         ]);
 
-        return $calculation;
+        return $calculated;
     }
 
     /**

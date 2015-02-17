@@ -96,10 +96,9 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase
             'price' => '100'
         ];
 
-        $expected = [
-            'name' => 'Foobar',
-            'price' => '110'
-        ];
+        $expected = new Collection(['name' => 'Foobar', 'price' => '110']);
+        $expected->setOriginalValue(100);
+        $expected->setCalculatedValue(110);
 
         $adapter->shouldReceive('add')
             ->once()
@@ -123,7 +122,7 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase
             ->with('first + second', ['first' => 100, 'second' => '10'])
             ->andReturn(110);
 
-        $this->assertEquals(new Collection($expected), $evaluator->condition('foo', $item));
+        $this->assertEquals($expected, $evaluator->condition('foo', $item));
     }
 
     public function testConditionWithRuleMethod()
@@ -148,10 +147,9 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase
             'price' => '40'
         ];
 
-        $expected = [
-            'name' => 'Foobar',
-            'price' => '90'
-        ];
+        $expected = new Collection(['name' => 'Foobar', 'price' => '90']);
+        $expected->setOriginalValue(100);
+        $expected->setCalculatedValue(90);
 
         $adapter->shouldReceive('add')
             ->once()
@@ -180,7 +178,7 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase
             ->with('first - second', ['first' => 100, 'second' => '10'])
             ->andReturn(90);
 
-        $this->assertEquals(new Collection($expected), $evaluator->condition('foo', $item));
+        $this->assertEquals($expected, $evaluator->condition('foo', $item));
 
          $expression->shouldReceive('evaluate')
             ->once()
@@ -215,6 +213,10 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase
             'quantity' => 2
         ];
 
+        $expected = new Collection(['name' => 'Foobar', 'price' => '220', 'quantity' => 2]);
+        $expected->setOriginalValue(100);
+        $expected->setCalculatedValue(220);
+
         $adapter->shouldReceive('add')
             ->once()
             ->with('foo', $stub)
@@ -247,7 +249,7 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase
             ->with('first + second', ['first' => 200, 'second' => '20'])
             ->andReturn(220);
 
-        $this->assertEquals(new Collection($expected), $evaluator->condition('foo', $item));
+        $this->assertEquals($expected, $evaluator->condition('foo', $item));
     }
 
     public function testConditionWithCallbackMethod()
@@ -265,11 +267,9 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase
             'name' => 'Foobar',
             'price' => '100'
         ];
-
-        $expected = [
-            'name' => 'Foobar',
-            'price' => '110'
-        ];
+        $expected = new Collection(['name' => 'Foobar', 'price' => '110']);
+        $expected->setOriginalValue(100);
+        $expected->setCalculatedValue(110);
 
         $adapter->shouldReceive('add')
             ->once()
@@ -297,7 +297,7 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase
             return $s;
         };
 
-        $this->assertEquals(new Collection($expected), $evaluator->condition('foo', $item, $callback));
+        $this->assertEquals($expected, $evaluator->condition('foo', $item, $callback));
     }
 
     protected function getMockDependencies()
