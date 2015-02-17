@@ -4,6 +4,7 @@ use Illuminate\Support\Fluent;
 use Illuminate\Support\Arr as A;
 use Elepunk\Evaluator\Contracts\Adapter;
 use Elepunk\Evaluator\Traits\ExpressionCheckerTrait;
+use Elepunk\Evaluator\Exceptions\MissingExpressionException;
 
 class File implements Adapter
 {
@@ -31,7 +32,7 @@ class File implements Adapter
         $expression = A::get($this->expressions, $key, null);
 
         if (is_null($expression)) {
-            throw new \Exception("Expression {{$key}} is not defined");
+            throw new MissingExpressionException("Expression {{$key}} is not defined");
         }
 
         return $expression;

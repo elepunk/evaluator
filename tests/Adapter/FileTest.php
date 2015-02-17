@@ -6,11 +6,17 @@ use Elepunk\Evaluator\Adapter\File;
 
 class FileTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @test
+     */
     public function tearDown()
     {
         m::close();
     }
 
+    /**
+     * @test
+     */
     public function testAddMethod()
     {
         $stub = [
@@ -24,6 +30,9 @@ class FileTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\Elepunk\Evaluator\Adapter\File', $adapter->add('foo', $stub));
     }
 
+    /**
+     * @test
+     */
     public function testGetMethod()
     {
         $stub = [
@@ -39,5 +48,27 @@ class FileTest extends \PHPUnit_Framework_TestCase
         $adapter->add('foo', $stub);
 
         $this->assertEquals($expected, $adapter->get('foo'));
+    }
+
+    /**
+     * @expectedException \Elepunk\Evaluator\Exceptions\MissingKeyException
+     */
+    public function testAddMethodThrowException()
+    {
+        $stub = [];
+
+        $adapter = new File();
+
+        $adapter->add('foo', $stub);
+    }
+
+    /**
+     * @expectedException \Elepunk\Evaluator\Exceptions\MissingExpressionException
+     */
+    public function testGetMethodThrowException()
+    {
+        $adapter = new File();
+
+        $adapter->get('bar');
     }
 }

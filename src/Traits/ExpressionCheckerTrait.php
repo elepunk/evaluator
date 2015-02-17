@@ -1,29 +1,35 @@
 <?php namespace Elepunk\Evaluator\Traits;
 
+use Elepunk\Evaluator\Exceptions\MissingKeyException;
+
 trait ExpressionCheckerTrait
 {
     /**
-     * [$expressions description]
-     * @var [type]
+     * Available expressions
+     * 
+     * @var array
      */
     protected $expressions = [];
 
     /**
-     * [$reservedKeys description]
-     * @var [type]
+     * Reserved keys for an expression
+     * 
+     * @var array
      */
     protected $reservedKeys = ['target', 'action'];
 
     /**
-     * [verifyExpression description]
-     * @param  [type] $expression [description]
-     * @return [type]             [description]
+     * Vaildate if expression contains the reserve keys
+     * 
+     * @param  array $expression
+     * @return boolean
+     * @throws  \Elepunk\Evaluator\Exceptions\MissingKeyException
      */
-    protected function verifyExpression($expression)
+    protected function verifyExpression(array $expression)
     {
         foreach ($this->reservedKeys as $key) {
             if (is_null($expression->get($key))) {
-                throw new \Exception("Expression is missing {$key}");
+                throw new MissingKeyException("Expression is missing {$key}");
             }
         }
 

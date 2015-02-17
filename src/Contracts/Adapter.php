@@ -7,7 +7,6 @@ interface Adapter
      * 
      * @param string $key
      * @param array  $expressions
-     *
      * @return \Elepunk\Evaluator\Contracts\Adapter
      */
     public function add($key, array $evaluations);
@@ -15,8 +14,9 @@ interface Adapter
     /**
      * Retrieve an expression
      * 
-     * @param  [type] $key [description]
-     * @return [type]      [description]
+     * @param  string $key
+     * @return \Illuminate\Support\Fluent
+     * @throws  \Elepunk\Evaluator\Exceptions\MissingExpressionException
      */
     public function get($key);
 }
