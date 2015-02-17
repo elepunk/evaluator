@@ -28,6 +28,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
         $adapter = new File();
 
         $this->assertInstanceOf('\Elepunk\Evaluator\Adapter\File', $adapter->add('foo', $stub));
+        $this->assertInstanceOf('\Elepunk\Evaluator\Adapter\File', $adapter->add('foo', 'foo > bar'));
     }
 
     /**

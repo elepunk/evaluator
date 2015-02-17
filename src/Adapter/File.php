@@ -13,8 +13,14 @@ class File implements Adapter
     /**
      * {@inheritdoc}
      */
-    public function add($key, array $expressions)
+    public function add($key, $expressions)
     {
+        if ( ! is_array($expressions)) {
+            $this->expressions = A::add($this->expressions, $key, $expressions);
+
+            return $this;
+        }
+
         $expression = new Fluent($expressions);
 
         if ($this->verifyExpression($expression)) {

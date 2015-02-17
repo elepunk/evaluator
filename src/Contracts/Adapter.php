@@ -9,7 +9,7 @@ interface Adapter
      * @param array  $expressions
      * @return \Elepunk\Evaluator\Contracts\Adapter
      */
-    public function add($key, array $evaluations);
+    public function add($key, $evaluations);
 
     /**
      * Retrieve an expression
