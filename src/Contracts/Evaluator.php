@@ -25,18 +25,20 @@ interface Evaluator
      * 
      * @param  string $expression
      * @param  mixed $item
-     * @return mixed
+     * @param  \Closure $callback
+     * @return mixed|\Closure
      */
-    public function evaluate($expression, $item);
+    public function evaluate($expression, $item, Closure $callback = null);
 
     /**
      * Evaluate an expression using stored rule
      * 
      * @param  string $expressionKey
      * @param  mixed $item
-     * @return mixed
+     * @param  \Closure $callback
+     * @return mixed|\Closure
      */
-    public function evaluateRule($expressionKey, $item);
+    public function evaluateRule($expressionKey, $item, Closure $callback = null);
 
     /**
      * Apply the condition rules to an item

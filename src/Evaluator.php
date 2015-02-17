@@ -57,19 +57,31 @@ class Evaluator implements EvaluatorInterface
     /**
      * {@inheritdoc}
      */
-    public function evaluate($expression, $item)
+    public function evaluate($expression, $item, Closure $callback = null)
     {   
-        return $this->getExpressionEngine()->evaluate($expression, $item);
+        $evaluate = $this->getExpressionEngine()->evaluate($expression, $item);
+
+        if ( ! is_null($callback) && $evaluate ) {
+            return call_user_func($callback, $item);
+        }
+
+        return $evaluate;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function evaluateRule($expressionKey, $item)
+    public function evaluateRule($expressionKey, $item, Closure $callback = null)
     {
         $expression = $this->expression()->get($expressionKey);
 
-        return $this->evaluate($expression, $item);
+        $evaluate = $this->evaluate($expression, $item);
+
+        if ( ! is_null($callback) && $evaluate ) {
+            return call_user_func($callback, $item);
+        }
+
+        return $evaluate;
     }
 
     /**

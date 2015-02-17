@@ -42,11 +42,17 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase
         ];
 
         $expression->shouldReceive('evaluate')
-            ->once()
+            ->twice()
             ->with('foo > bar', $stub)
             ->andReturn(true);
 
         $this->assertTrue($evaluator->evaluate('foo > bar', $stub));
+
+        $callback = function ($s) {
+            return $s;
+        };
+
+        $this->assertEquals($stub, $evaluator->evaluate('foo > bar', $stub, $callback));
     }
 
     public function testEvaluateRuleMethod()
@@ -68,16 +74,22 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase
         $evaluator->expression()->add('foo', 'foo > bar');
 
         $adapter->shouldReceive('get')
-            ->once()
+            ->twice()
             ->with('foo')
             ->andReturn('foo > bar');
 
         $expression->shouldReceive('evaluate')
-            ->once()
+            ->twice()
             ->with('foo > bar', $stub)
             ->andReturn(true);
 
         $this->assertTrue($evaluator->evaluateRule('foo', $stub));
+
+        $callback = function ($s) {
+            return $s;
+        };
+
+        $this->assertEquals($stub, $evaluator->evaluateRule('foo', $stub, $callback));
     }
 
     public function testConditionWithoutRuleMethod()
