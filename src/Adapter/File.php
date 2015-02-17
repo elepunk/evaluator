@@ -37,4 +37,22 @@ class File implements Adapter
 
         return $expression;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function remove($key)
+    {
+        A::forget($this->expressions, $key);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function expressions()
+    {
+        return $this->expressions;
+    }
 }

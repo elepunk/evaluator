@@ -1,5 +1,6 @@
 <?php namespace Elepunk\Evaluator\Traits;
 
+use Illuminate\Support\Fluent;
 use Elepunk\Evaluator\Exceptions\MissingKeyException;
 
 trait ExpressionCheckerTrait
@@ -25,7 +26,7 @@ trait ExpressionCheckerTrait
      * @return boolean
      * @throws  \Elepunk\Evaluator\Exceptions\MissingKeyException
      */
-    protected function verifyExpression(array $expression)
+    protected function verifyExpression(Fluent $expression)
     {
         foreach ($this->reservedKeys as $key) {
             if (is_null($expression->get($key))) {

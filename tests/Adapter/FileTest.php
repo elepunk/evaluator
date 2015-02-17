@@ -71,4 +71,43 @@ class FileTest extends \PHPUnit_Framework_TestCase
 
         $adapter->get('bar');
     }
+
+    public function testRemoveMethod()
+    {
+        $stub = [
+            'target' => 'foo',
+            'rule' => 'foo > bar',
+            'action' => '10%'
+        ];
+
+        $adapter = new File();
+
+        $adapter->add('foo', $stub);
+        $adapter->add('bar', $stub);
+
+        $adapter->remove('foo');
+
+        $this->assertInstanceOf('\Elepunk\Evaluator\Adapter\File', $adapter->remove('foo'));
+        $this->assertEquals(['bar' => new Fluent($stub)], $adapter->expressions());
+    }
+
+    /**
+     * @test
+     */
+    public function testExpressionsMethod()
+    {
+        $stub = [
+            'target' => 'foo',
+            'rule' => 'foo > bar',
+            'action' => '10%'
+        ];
+
+        $adapter = new File();
+
+        $this->assertEquals([], $adapter->expressions());
+
+        $adapter->add('foo', $stub);
+
+        $this->assertEquals(['foo' => new Fluent($stub)], $adapter->expressions());
+    }
 }
