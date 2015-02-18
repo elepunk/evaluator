@@ -14,6 +14,7 @@
 	"require": {
 		"php": ">=5.4",
 		"illuminate/support": "5.*",
+		"orchestra/memory": "3.*",
 		"illuminate/contracts": "5.*",
 		"symfony/expression-language": "~2.6"
 	},
@@ -26,8 +27,5 @@
 			"Elepunk\\Evaluator\\": "src/"
 		}
 	},
-	"suggest": {
-        		"orchestra/memory": "Allow using orchestra/memory as a driver"
-    	},
 	"mininum-stability": "stable"
 }
