@@ -6,12 +6,18 @@ use Elepunk\Evaluator\Evaluator;
 use Elepunk\Evaluator\Collection;
 
 class EvaluatorTest extends \PHPUnit_Framework_TestCase
-{
+{   
+    /**
+     * @test
+     */
     public function tearDown()
     {
         m::close();
     }
 
+    /**
+     * @test
+     */
     public function testGetExpressionEngineMethod()
     {
         list($expression, $adapter) = $this->getMockDependencies();
@@ -21,6 +27,9 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\Symfony\Component\ExpressionLanguage\ExpressionLanguage', $evaluator->getExpressionEngine());
     }
 
+    /**
+     * @test
+     */
     public function testExpressionMethod()
     {
         list($expression, $adapter) = $this->getMockDependencies();
@@ -30,6 +39,9 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\Elepunk\Evaluator\Contracts\Adapter', $evaluator->expression());
     }
 
+    /**
+     * @test
+     */
     public function testEvaluateMethod()
     {
         list($expression, $adapter) = $this->getMockDependencies();
@@ -55,6 +67,9 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($stub, $evaluator->evaluate('foo > bar', $stub, $callback));
     }
 
+    /**
+     * @test
+     */
     public function testEvaluateRuleMethod()
     {
         list($expression, $adapter) = $this->getMockDependencies();
@@ -92,6 +107,9 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($stub, $evaluator->evaluateRule('foo', $stub, $callback));
     }
 
+    /**
+     * @test
+     */
     public function testConditionWithoutRuleMethod()
     {
         list($expression, $adapter) = $this->getMockDependencies();
@@ -137,6 +155,9 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $evaluator->condition('foo', $item));
     }
 
+    /**
+     * @test
+     */
     public function testConditionWithRuleMethod()
     {
         list($expression, $adapter) = $this->getMockDependencies();
@@ -200,6 +221,9 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(new Collection($falseItem), $evaluator->condition('foo', $falseItem));
     }
 
+    /**
+     * @test
+     */
     public function testConditionWithMultiplierMethod()
     {
         list($expression, $adapter) = $this->getMockDependencies();
@@ -264,6 +288,9 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $evaluator->condition('foo', $item));
     }
 
+    /**
+     * @test
+     */
     public function testConditionWithCallbackMethod()
     {
         list($expression, $adapter) = $this->getMockDependencies();

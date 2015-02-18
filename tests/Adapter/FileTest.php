@@ -14,6 +14,28 @@ class FileTest extends \PHPUnit_Framework_TestCase
         m::close();
     }
 
+    public function testLoadCacheMethod()
+    {
+        $stub = [
+            'target' => 'foo',
+            'rule' => 'foo > bar',
+            'action' => '10%'
+        ];
+
+        $cache = m::mock('Illuminate\Contracts\Cache\Repository');
+        $adapter = new File($cache);
+
+        $this->assertEquals([], $adapter->expressions());
+
+        $cache->shouldReceive('get')
+            ->once()
+            ->with('elepunk.evaluator', [])
+            ->andReturn($stub);
+
+        $this->assertInstanceOf('\Elepunk\Evaluator\Adapter\File', $adapter->loadCache());
+        $this->assertEquals($stub, $adapter->expressions());
+    }
+
     /**
      * @test
      */
@@ -25,7 +47,12 @@ class FileTest extends \PHPUnit_Framework_TestCase
             'action' => '10%'
         ];
 
-        $adapter = new File();
+        $cache = m::mock('Illuminate\Contracts\Cache\Repository');
+        $adapter = new File($cache);
+
+        $cache->shouldReceive('forever')
+            ->once()
+            ->with('elepunk.evaluator', ['foo' => new Fluent($stub)]);
 
         $this->assertInstanceOf('\Elepunk\Evaluator\Adapter\File', $adapter->add('foo', $stub));
         $this->assertInstanceOf('\Elepunk\Evaluator\Adapter\File', $adapter->add('foo', 'foo > bar'));
@@ -44,7 +71,12 @@ class FileTest extends \PHPUnit_Framework_TestCase
 
         $expected = new Fluent($stub);
 
-        $adapter = new File();
+        $cache = m::mock('Illuminate\Contracts\Cache\Repository');
+        $adapter = new File($cache);
+
+        $cache->shouldReceive('forever')
+            ->once()
+            ->with('elepunk.evaluator', ['foo' => new Fluent($stub)]);
 
         $adapter->add('foo', $stub);
 
@@ -58,7 +90,8 @@ class FileTest extends \PHPUnit_Framework_TestCase
     {
         $stub = [];
 
-        $adapter = new File();
+        $cache = m::mock('Illuminate\Contracts\Cache\Repository');
+        $adapter = new File($cache);
 
         $adapter->add('foo', $stub);
     }
@@ -68,7 +101,8 @@ class FileTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMethodThrowException()
     {
-        $adapter = new File();
+        $cache = m::mock('Illuminate\Contracts\Cache\Repository');
+        $adapter = new File($cache);
 
         $adapter->get('bar');
     }
@@ -81,10 +115,24 @@ class FileTest extends \PHPUnit_Framework_TestCase
             'action' => '10%'
         ];
 
-        $adapter = new File();
+        $cache = m::mock('Illuminate\Contracts\Cache\Repository');
+        $adapter = new File($cache);
+
+        $cache->shouldReceive('forever')
+            ->once()
+            ->with('elepunk.evaluator', ['foo' => new Fluent($stub)]);
 
         $adapter->add('foo', $stub);
+
+        $cache->shouldReceive('forever')
+            ->once()
+            ->with('elepunk.evaluator', ['foo' => new Fluent($stub), 'bar' => new Fluent($stub)]);
+
         $adapter->add('bar', $stub);
+
+        $cache->shouldReceive('forever')
+            ->twice()
+            ->with('elepunk.evaluator', ['bar' => new Fluent($stub)]);
 
         $adapter->remove('foo');
 
@@ -103,10 +151,15 @@ class FileTest extends \PHPUnit_Framework_TestCase
             'action' => '10%'
         ];
 
-        $adapter = new File();
+        $cache = m::mock('Illuminate\Contracts\Cache\Repository');
+        $adapter = new File($cache);
 
         $this->assertEquals([], $adapter->expressions());
 
+        $cache->shouldReceive('forever')
+            ->once()
+            ->with('elepunk.evaluator', ['foo' => new Fluent($stub)]);
+        
         $adapter->add('foo', $stub);
 
         $this->assertEquals(['foo' => new Fluent($stub)], $adapter->expressions());

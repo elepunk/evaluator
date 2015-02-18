@@ -17,7 +17,7 @@ class EvaluatorManager extends Manager
 
     public function createFileDriver()
     {
-        $adapter = new Adapter\File;
+        $adapter = (new Adapter\File)->loadCache();
         $expression = new ExpressionLanguage;
 
         return new Evaluator($expression, $adapter);
