@@ -57,21 +57,17 @@ class Memory implements Adapter
      * @param array  $expressions
      * @return \Elepunk\Evaluator\Contracts\Adapter
      */
-    public function add($key, $evaluations)
+    public function add($key, $expression)
     {
-        if ( ! is_array($expressions)) {
-            $this->expressions = A::add($this->expressions, $key, $expressions);
+        if ( ! is_array($expression)) {
+            $this->storeExpression($key, $expression);
+        } else {
+            $expression = new Fluent($expression);
 
-            return $this;
+            if ($this->verifyExpression($expression)) {
+                $this->storeExpression($key, $expression);    
+            }
         }
-
-        $expression = new Fluent($expressions);
-
-        if ($this->verifyExpression($expression)) {
-            $this->expressions = A::add($this->expressions, $key, $expression);    
-        }
-
-        $this->reload();
 
         return $this;
     }
@@ -117,5 +113,19 @@ class Memory implements Adapter
     public function expressions()
     {
         return $this->expressions;
+    }
+
+    /**
+     * Save the expression
+     * 
+     * @param  string $key
+     * @param  mixed $expression
+     * @return void
+     */
+    protected function storeExpression($key, $expression)
+    {
+        $this->expressions = A::add($this->expressions, $key, $expression);
+
+        $this->reload();
     }
 }

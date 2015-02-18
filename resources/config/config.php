@@ -7,9 +7,9 @@ return [
     | Default Driver
     |----------------------------------------------------------------------
     |
-    | Available drivers are 'file' and 'memory'
+    | Available drivers is 'memory'
     |
     */
-    'driver' => 'file'
+    'driver' => 'memory'
 
 ];
