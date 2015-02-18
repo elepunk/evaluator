@@ -12,7 +12,7 @@ class EvaluatorManager extends Manager
      */
     public function getDefaultDriver()
     {
-        return $this->app['config']->get('elepunk/evaluator::driver', 'file');
+        return $this->app['config']->get('elepunk/evaluator::driver', 'memory');
     }
 
     /**
