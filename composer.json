@@ -13,9 +13,8 @@
 	],
 	"require": {
 		"php": ">=5.4",
-		"illuminate/support": "5.*",
+		"orchestra/config": "3.*",
 		"orchestra/memory": "3.*",
-		"illuminate/contracts": "5.*",
 		"symfony/expression-language": "~2.6"
 	},
 	"require-dev": {

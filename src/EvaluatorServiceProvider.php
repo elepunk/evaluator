@@ -1,10 +1,17 @@
 <?php namespace Elepunk\Evaluator;
 
-use Illuminate\Support\ServiceProvider;
 use Elepunk\Evaluator\EvaluatorManager;
+use Orchestra\Support\Providers\ServiceProvider;
 
 class EvaluatorServiceProvider extends ServiceProvider
 {
+    /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    protected $defer = true;
+
     /**
      * Bootstrap available services
      * 
@@ -12,7 +19,9 @@ class EvaluatorServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $path = realpath(__DIR__.'/../resources');
+
+        $this->addConfigComponent('elepunk/evaluator', 'elepunk/evaluator', $path.'/config');
     }
 
     /**
