@@ -16,8 +16,7 @@ A Laravel package and Orchestra extension for [symfony/expression-language](http
 
 ## Drivers
 
-By default this package support two drivers
-* File (the config file)
+This package provide Orchesta Memory as the default driver.
 
 ## Usage
 
