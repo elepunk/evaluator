@@ -1,20 +1,33 @@
 {
 	"name": "elepunk/evaluator",
-	"description": "Evaluator",
+	"description": "Laravel package for symfony expression language",
+	"license": "MIT",
+	"homepage": "http://elepunk.com",
+	"keywords": ["laravel", "orchestra", "expression-language"],
+	"authors": [
+		{
+			"name": "Ahmad Shah Hafizan Hamidin",
+			"email": "ahmadshahhafizan@gmail.com",
+			"homepage": "https://github.com/ahmadshah"
+		}
+	],
 	"require": {
-		"symfony/expression-language": "~2.6",
+		"php": ">=5.4",
 		"illuminate/support": "5.*",
-		"illuminate/contracts": "5.*"
+		"illuminate/contracts": "5.*",
+		"symfony/expression-language": "~2.6"
 	},
 	"require-dev": {
 	        "mockery/mockery": "~0.9",
-	        "satooshi/php-coveralls": "~0.6",
-	        "illuminate/support": "5.*"
+	        "satooshi/php-coveralls": "~0.6"
 	},
 	"autoload": {
 		"psr-4": {
 			"Elepunk\\Evaluator\\": "src/"
 		}
 	},
-	"mininum-stability": "dev"
+	"suggest": {
+        		"orchestra/memory": "Allow using orchestra/memory as a driver"
+    	},
+	"mininum-stability": "stable"
 }
