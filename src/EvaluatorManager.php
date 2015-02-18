@@ -5,19 +5,47 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 class EvaluatorManager extends Manager
 {
+    /**
+     * Retrieve the default driver
+     * 
+     * @return string
+     */
     public function getDefaultDriver()
     {
         return $this->app['config']->get('elepunk/evaluator::driver', 'file');
     }
 
+    /**
+     * Set the default driver
+     *
+     * @return  void
+     */
     public function setDefaultDriver()
     {
         $this->app['config']->set('elepunk/evaluator::driver', $name);
     }
 
+    /**
+     * Create file adapter driver
+     * 
+     * @return \Elepunk\Evaluator\Evaluator
+     */
     public function createFileDriver()
     {
-        $adapter = (new Adapter\File)->loadCache();
+        $adapter = (new Adapter\File($this->app['cache']))->load();
+        $expression = new ExpressionLanguage;
+
+        return new Evaluator($expression, $adapter);
+    }
+
+    /**
+     * Create memory adapter driver
+     * 
+     * @return \Elepunk\Evaluator\Evaluator
+     */
+    public function createMemoryDriver()
+    {
+        $adapter = (new Adapter\Memory($this->app['orchestra.memory']))->load();
         $expression = new ExpressionLanguage;
 
         return new Evaluator($expression, $adapter);

@@ -14,7 +14,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
         m::close();
     }
 
-    public function testLoadCacheMethod()
+    public function testLoadMethod()
     {
         $stub = [
             'target' => 'foo',
@@ -32,7 +32,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
             ->with('elepunk.evaluator', [])
             ->andReturn($stub);
 
-        $this->assertInstanceOf('\Elepunk\Evaluator\Adapter\File', $adapter->loadCache());
+        $this->assertInstanceOf('\Elepunk\Evaluator\Adapter\File', $adapter->load());
         $this->assertEquals($stub, $adapter->expressions());
     }
 

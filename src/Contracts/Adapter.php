@@ -3,6 +3,20 @@
 interface Adapter
 {
     /**
+     * Load expressions from cache
+     * 
+     * @return \Elepunk\Evaluator\Adapter\File
+     */
+    public function load();
+
+    /**
+     * Reload the expression cache
+     * 
+     * @return void
+     */
+    public function reload();
+
+    /**
      * Add a new expression for evaluation
      * 
      * @param string $key

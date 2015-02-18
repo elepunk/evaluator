@@ -3,53 +3,61 @@
 use Illuminate\Support\Fluent;
 use Illuminate\Support\Arr as A;
 use Elepunk\Evaluator\Contracts\Adapter;
-use Illuminate\Contracts\Cache\Repository as Cache;
+use Orchestra\Contracts\Memory\Provider;
 use Elepunk\Evaluator\Traits\ExpressionCheckerTrait;
 use Elepunk\Evaluator\Exceptions\MissingExpressionException;
 
-class File implements Adapter
+class Memory implements Adapter
 {
     use ExpressionCheckerTrait;
 
     /**
-     * Cache repository
+     * Orchestra Memory component
      * 
-     * @var \Illuminate\Contracts\Cache\Repository
+     * @var \Orchestra\Contracts\Memory\Provider
      */
-    protected $cache;
+    protected $memory;
 
     /**
-     * Create new file adapter instance
+     * Construct new memory adapter
      * 
-     * @param \Illuminate\Contracts\Cache\Repository $cache
+     * @param \Orchestra\Contracts\Memory\Provider $memory
      */
-    public function __construct(Cache $cache)
+    public function __construct(Provider $memory)
     {
-        $this->cache = $cache;
+        $this->memory = $memory;
     }
 
     /**
-     * {@inheritdoc}
+     * Load expressions from cache
+     * 
+     * @return \Elepunk\Evaluator\Adapter\File
      */
     public function load()
     {
-        $this->expressions = $this->cache->get('elepunk.evaluator', []);
+        $this->expressions = $this->memory->get('elepunk_evaluator', []);
 
         return $this;
     }
 
     /**
-     * {@inheritdoc}
+     * Reload the expression cache
+     * 
+     * @return void
      */
     public function reload()
     {
-        $this->cache->forever('elepunk.evaluator', $this->expressions());
+        $this->memory->put('elepunk_evaluator', $this->expressions());
     }
 
     /**
-     * {@inheritdoc}
+     * Add a new expression for evaluation
+     * 
+     * @param string $key
+     * @param array  $expressions
+     * @return \Elepunk\Evaluator\Contracts\Adapter
      */
-    public function add($key, $expressions)
+    public function add($key, $evaluations)
     {
         if ( ! is_array($expressions)) {
             $this->expressions = A::add($this->expressions, $key, $expressions);
@@ -69,7 +77,11 @@ class File implements Adapter
     }
 
     /**
-     * {@inheritdoc}
+     * Retrieve an expression
+     * 
+     * @param  string $key
+     * @return \Illuminate\Support\Fluent
+     * @throws  \Elepunk\Evaluator\Exceptions\MissingExpressionException
      */
     public function get($key)
     {
@@ -83,7 +95,10 @@ class File implements Adapter
     }
 
     /**
-     * {@inheritdoc}
+     * Remove an expression
+     * 
+     * @param  string $key
+     * @return \Elepunk\Evaluator\Contracts\Adapter
      */
     public function remove($key)
     {
@@ -95,7 +110,9 @@ class File implements Adapter
     }
 
     /**
-     * {@inheritdoc}
+     * Retreive all available expressions
+     * 
+     * @return array
      */
     public function expressions()
     {
