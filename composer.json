@@ -13,8 +13,8 @@
 	],
 	"require": {
 		"php": ">=5.4",
-		"orchestra/config": "3.*",
-		"orchestra/memory": "3.*",
+		"orchestra/config": "~3.0",
+		"orchestra/memory": "~3.0",
 		"symfony/expression-language": "~2.6"
 	},
 	"require-dev": {

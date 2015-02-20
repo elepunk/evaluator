@@ -1,5 +1,6 @@
 <?php namespace Elepunk\Evaluator;
 
+use Illuminate\Foundation\AliasLoader;
 use Orchestra\Support\Providers\ServiceProvider;
 
 class EvaluatorServiceProvider extends ServiceProvider
@@ -23,8 +24,32 @@ class EvaluatorServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->registerManager();
+
+        $this->registerFacade();
+    }
+
+    /**
+     * Register evaluator manager
+     * 
+     * @return void
+     */
+    protected function registerManager()
+    {
         $this->app->singleton('elepunk.evaluator', function () {
             return new EvaluatorManager($this->app);
         });
+    }
+
+    /**
+     * Register facade
+     * 
+     * @return void
+     */
+    protected function registerFacade()
+    {
+        $loader = AliasLoader::getInstance();
+
+        $loader->alias('Elepunk\Evaluator\Facades\Evaluator', 'Evaluator');
     }
 }
