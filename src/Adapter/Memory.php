@@ -28,9 +28,7 @@ class Memory implements Adapter
     }
 
     /**
-     * Load expressions from cache
-     * 
-     * @return \Elepunk\Evaluator\Adapter\File
+     * {@inheritdoc}
      */
     public function load()
     {
@@ -40,9 +38,7 @@ class Memory implements Adapter
     }
 
     /**
-     * Reload the expression cache
-     * 
-     * @return void
+     * {@inheritdoc}
      */
     public function reload()
     {
@@ -50,11 +46,7 @@ class Memory implements Adapter
     }
 
     /**
-     * Add a new expression for evaluation
-     * 
-     * @param string $key
-     * @param array  $expressions
-     * @return \Elepunk\Evaluator\Contracts\Adapter
+     * {@inheritdoc}
      */
     public function add($key, $expression)
     {
@@ -72,11 +64,7 @@ class Memory implements Adapter
     }
 
     /**
-     * Retrieve an expression
-     * 
-     * @param  string $key
-     * @return \Illuminate\Support\Fluent
-     * @throws  \Elepunk\Evaluator\Exceptions\MissingExpressionException
+     * {@inheritdoc}
      */
     public function get($key)
     {
@@ -90,10 +78,7 @@ class Memory implements Adapter
     }
 
     /**
-     * Remove an expression
-     * 
-     * @param  string $key
-     * @return \Elepunk\Evaluator\Contracts\Adapter
+     * {@inheritdoc}
      */
     public function remove($key)
     {
@@ -105,9 +90,7 @@ class Memory implements Adapter
     }
 
     /**
-     * Retreive all available expressions
-     * 
-     * @return array
+     * {@inheritdoc}
      */
     public function expressions()
     {
