@@ -1,11 +1,6 @@
-<<<<<<< HEAD
 # Composer
 /vendor/*
 composer.lock
 
 # Testing
 /build/*
-=======
-composer.lock
-/vendor/*
->>>>>>> 1ad5b14d76cabbf5ffd8a1e534f930fca8652cc6
