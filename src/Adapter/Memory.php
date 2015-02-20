@@ -124,7 +124,7 @@ class Memory implements Adapter
     protected function storeExpression($key, $expression)
     {
         if (A::has($this->expressions, $key)) {
-            $this->expressions = A::set($this->expressions, $key, $expression)
+            $this->expressions = A::set($this->expressions, $key, $expression);
         } else {
             $this->expressions = A::add($this->expressions, $key, $expression);
         }
