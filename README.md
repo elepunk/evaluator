@@ -12,13 +12,33 @@ A Laravel package and Orchestra extension for [symfony/expression-language](http
 
 ## Installation
 
+Simpy update the ```composer.json``` file and run ```composer install```.
+
+```json
+"require": {
+	"elepunk/evaluator": "1.0.*"
+}
+```
+
+## Quick Installation
+
+```composer require "elepunk/evaluator=1.0.*"```
+
 ## Setup
 
-## Drivers
+If you are using Orchestra Platform, you can simply enable the extension or add the service provider.
+
+```php
+'providers' => [
+	'Elepunk\Evaluator\EvaluatorServiceProvider'
+];
+```
+
+## Adapter
 
 This package provide Orchesta Memory as the default driver.
 
-## Usage
+## How To Use
 
 ### Evaluating an expression
 
@@ -33,6 +53,8 @@ $test = [
 echo Evaluator::evaluate('foo > bar', $test); //this will return true
 ```
 
+You can also save the expression rule.
+
 ```php
 use Elepunk\Evaluator\Facades\Evaluator;
 
@@ -46,7 +68,9 @@ Evaluator::expression()->add('test', 'foo > bar');
 echo Evaluator::evaluate('test', $test); //this will return true
 ```
 
-### Conditioner
+For supported expressions, visit the [Symfony Expression Language Component](http://symfony.com/doc/current/components/expression_language/index.html).
+
+### Condition
 
 Let say we want to implement 10% tax to our collection.
 
@@ -68,4 +92,22 @@ Evaluator::expression()->add('tax', $condition);
 $calculated = Evaluator::condition('tax', $item);
 ```
 
-For supported expressions, visit the [Symfony Expression Language Component](http://symfony.com/doc/current/components/expression_language/index.html).
+Item with multiplier.
+
+```php
+$item = [
+	'price' => 50,
+	'quantity' => 2
+];
+
+$condition = [
+    'target' => 'price',
+    'action' => '10%',
+    'rule' => 'price > 50',
+    'multiplier' => 'quantity'
+];
+
+Evaluator::expression()->add('tax', $condition);
+
+$calculated = Evaluator::condition('tax', $item);
+```
