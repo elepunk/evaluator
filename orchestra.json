@@ -1,0 +1,10 @@
+{
+	"name": "Evaluator",
+	"description": "Laravel package for Symfony Expression Language",
+	"author": "Ahmad Shah Hafizan Hamidin",
+	"url": "https://github.com/elepunk/evaluator",
+	"version": "1.0.0",
+	"provides": [
+		"Elepunk\\Evaluator\\EvaluatorServiceProvider"
+	]
+}
