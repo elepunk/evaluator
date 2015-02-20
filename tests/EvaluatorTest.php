@@ -339,6 +339,49 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $evaluator->condition('foo', $item, $callback));
     }
 
+    /**
+     * @test
+     */
+    public function testConditionFloatMethod()
+    {
+        list($expression, $adapter) = $this->getMockDependencies();
+
+        $evaluator = new Evaluator($expression, $adapter);
+
+        $stub = [
+            'target' => 'price',
+            'action' => '+0.1',
+        ];
+
+        $item = [
+            'name' => 'Foobar',
+            'price' => '100'
+        ];
+
+        $expected = new Collection(['name' => 'Foobar', 'price' => '100.1']);
+        $expected->setOriginalValue(100);
+        $expected->setCalculatedValue(100.1);
+
+        $adapter->shouldReceive('add')
+            ->once()
+            ->with('foo', $stub)
+            ->andReturn($adapter);
+
+        $evaluator->expression()->add('foo', $stub);
+
+        $adapter->shouldReceive('get')
+            ->once()
+            ->with('foo')
+            ->andReturn(new Fluent($stub));
+
+        $expression->shouldReceive('evaluate')
+            ->once()
+            ->with('first + second', ['first' => 100, 'second' => '0.1'])
+            ->andReturn(100.1);
+
+        $this->assertEquals($expected, $evaluator->condition('foo', $item));
+    }
+
     protected function getMockDependencies()
     {
         $expression = m::mock('\Symfony\Component\ExpressionLanguage\ExpressionLanguage');

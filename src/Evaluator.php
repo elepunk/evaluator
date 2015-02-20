@@ -130,6 +130,8 @@ class Evaluator implements EvaluatorInterface
         $operator = $this->getArithmeticOperator($action);
         $target = $this->isMutiplying($expression, $item);
 
+        $value = $this->getCalculationValue($expression->action);
+
         if ($this->isPercentage($action)) {
             $value = $this->evaluate('(value/100)*target', [
                 'target' => $target,
@@ -189,7 +191,7 @@ class Evaluator implements EvaluatorInterface
      */
     protected function getCalculationValue($input)
     {
-        preg_match('/([0-9]+)/', $input, $matches);
+        preg_match('/([0-9.]+)$|([0-9]+)/', $input, $matches);
 
         return $matches[0];
     }
