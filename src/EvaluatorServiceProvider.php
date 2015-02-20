@@ -1,17 +1,9 @@
 <?php namespace Elepunk\Evaluator;
 
-use Elepunk\Evaluator\EvaluatorManager;
 use Orchestra\Support\Providers\ServiceProvider;
 
 class EvaluatorServiceProvider extends ServiceProvider
 {
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = true;
-
     /**
      * Bootstrap available services
      * 

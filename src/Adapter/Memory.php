@@ -3,7 +3,6 @@
 use Illuminate\Support\Fluent;
 use Illuminate\Support\Arr as A;
 use Elepunk\Evaluator\Contracts\Adapter;
-use Orchestra\Contracts\Memory\Provider;
 use Elepunk\Evaluator\Traits\ExpressionCheckerTrait;
 use Elepunk\Evaluator\Exceptions\MissingExpressionException;
 
@@ -14,16 +13,16 @@ class Memory implements Adapter
     /**
      * Orchestra Memory component
      * 
-     * @var \Orchestra\Contracts\Memory\Provider
+     * @var \Orchestra\Memory\MemoryManager
      */
     protected $memory;
 
     /**
      * Construct new memory adapter
      * 
-     * @param \Orchestra\Contracts\Memory\Provider $memory
+     * @param \Orchestra\Memory\MemoryManager $memory
      */
-    public function __construct(Provider $memory)
+    public function __construct($memory)
     {
         $this->memory = $memory;
     }
