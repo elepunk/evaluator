@@ -18,9 +18,10 @@ class EvaluatorManager extends Manager
     /**
      * Set the default driver
      *
+     * @param  string $name
      * @return  void
      */
-    public function setDefaultDriver()
+    public function setDefaultDriver($name)
     {
         $this->app['config']->set('elepunk/evaluator::driver', $name);
     }

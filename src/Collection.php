@@ -34,6 +34,7 @@ class Collection extends BaseCollection
      * Set the calculated value
      *
      * @param string|integer $value
+     * @return \Elepunk\Evaluator\Collection
      */
     public function setCalculatedValue($value)
     {
@@ -45,7 +46,7 @@ class Collection extends BaseCollection
     /**
      * Retrieve the original value
      *
-     * @param string|integer $value
+     * @return string|integer
      */
     public function getOriginal()
     {
@@ -55,7 +56,7 @@ class Collection extends BaseCollection
     /**
      * Retrieve the calculated value
      *
-     * @param string|integer $value
+     * @return string|integer
      */
     public function getResult()
     {

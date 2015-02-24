@@ -29,8 +29,6 @@ class Evaluator implements EvaluatorInterface
      *
      * @param \Symfony\Component\ExpressionLanguage\ExpressionLanguge $expression
      * @param \Elepunk\Evaluator\Contracts\AdapterInterface $adapter
-     *
-     * @return  void
      */
     public function __construct(ExpressionLanguage $expression, AdapterInterface $adapter)
     {
@@ -61,7 +59,7 @@ class Evaluator implements EvaluatorInterface
     {
         $evaluate = $this->getExpressionEngine()->evaluate($expression, $collection);
 
-        if (! is_null($callback) && $evaluate) {
+        if (! is_null($callback)) {
             return call_user_func($callback, $collection);
         }
 
@@ -77,7 +75,7 @@ class Evaluator implements EvaluatorInterface
 
         $evaluate = $this->evaluate($expression, $collection);
 
-        if (! is_null($callback) && $evaluate) {
+        if (! is_null($callback)) {
             return call_user_func($callback, $collection);
         }
 

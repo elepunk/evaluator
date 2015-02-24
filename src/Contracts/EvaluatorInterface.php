@@ -14,7 +14,7 @@ interface EvaluatorInterface
     /**
      * Get evaluator current adapter instance
      *
-     * @return \Elepunk\Evaluator\Contracts\Adapter
+     * @return \Elepunk\Evaluator\Contracts\AdapterInterface
      */
     public function expression();
 

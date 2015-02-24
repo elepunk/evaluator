@@ -20,10 +20,10 @@ interface AdapterInterface
      * Add a new expression for evaluation
      *
      * @param string $key
-     * @param array  $expressions
+     * @param array|string  $expression
      * @return \Elepunk\Evaluator\Contracts\AdapterInterface
      */
-    public function add($key, $evaluations);
+    public function add($key, $expression);
 
     /**
      * Retrieve an expression
