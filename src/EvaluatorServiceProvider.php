@@ -50,6 +50,6 @@ class EvaluatorServiceProvider extends ServiceProvider
     {
         $loader = AliasLoader::getInstance();
 
-        $loader->alias('Elepunk\Evaluator\Facades\Evaluator', 'Evaluator');
+        $loader->alias('Evaluator', 'Elepunk\Evaluator\Facades\Evaluator');
     }
 }
