@@ -1,3 +1,5 @@
 <?php namespace Elepunk\Evaluator\Exceptions;
 
-class MissingExpressionException extends \Exception {}
+class MissingExpressionException extends \Exception
+{
+}

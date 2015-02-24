@@ -7,7 +7,7 @@ class EvaluatorServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap available services
-     * 
+     *
      * @return void
      */
     public function boot()
@@ -19,7 +19,7 @@ class EvaluatorServiceProvider extends ServiceProvider
 
     /**
      * Register available services
-     * 
+     *
      * @return void
      */
     public function register()
@@ -31,7 +31,7 @@ class EvaluatorServiceProvider extends ServiceProvider
 
     /**
      * Register evaluator manager
-     * 
+     *
      * @return void
      */
     protected function registerManager()
@@ -43,7 +43,7 @@ class EvaluatorServiceProvider extends ServiceProvider
 
     /**
      * Register facade
-     * 
+     *
      * @return void
      */
     protected function registerFacade()

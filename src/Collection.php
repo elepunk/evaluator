@@ -6,21 +6,21 @@ class Collection extends BaseCollection
 {
     /**
      * Original value before calculation
-     * 
+     *
      * @var string|integer
      */
     protected $originalValue;
 
     /**
      * Calculated value after condition
-     * 
+     *
      * @var string|integer
      */
     protected $calculatedValue;
 
     /**
      * Set the original value
-     * 
+     *
      * @param string|integer $value
      */
     public function setOriginalValue($value)
@@ -32,7 +32,7 @@ class Collection extends BaseCollection
 
     /**
      * Set the calculated value
-     * 
+     *
      * @param string|integer $value
      */
     public function setCalculatedValue($value)
@@ -44,7 +44,7 @@ class Collection extends BaseCollection
 
     /**
      * Retrieve the original value
-     * 
+     *
      * @param string|integer $value
      */
     public function getOriginal()
@@ -54,7 +54,7 @@ class Collection extends BaseCollection
 
     /**
      * Retrieve the calculated value
-     * 
+     *
      * @param string|integer $value
      */
     public function getResult()

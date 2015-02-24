@@ -12,14 +12,14 @@ class Memory implements AdapterInterface
 
     /**
      * Orchestra Memory component
-     * 
+     *
      * @var \Orchestra\Memory\MemoryManager
      */
     protected $memory;
 
     /**
      * Construct new memory adapter
-     * 
+     *
      * @param \Orchestra\Memory\MemoryManager $memory
      */
     public function __construct($memory)
@@ -50,13 +50,13 @@ class Memory implements AdapterInterface
      */
     public function add($key, $expression)
     {
-        if ( ! is_array($expression)) {
+        if (! is_array($expression)) {
             $this->storeExpression($key, $expression);
         } else {
             $expression = new Fluent($expression);
 
             if ($this->verifyExpression($expression)) {
-                $this->storeExpression($key, $expression);    
+                $this->storeExpression($key, $expression);
             }
         }
 
@@ -99,7 +99,7 @@ class Memory implements AdapterInterface
 
     /**
      * Save the expression
-     * 
+     *
      * @param  string $key
      * @param  mixed $expression
      * @return void

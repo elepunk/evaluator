@@ -12,24 +12,24 @@ class Evaluator implements EvaluatorInterface
 {
     /**
      * Symfony Expression Language instance
-     * 
+     *
      * @var \Symfony\Component\ExpressionLanguage\ExpressionLanguage
      */
     protected $expressionEngine;
 
     /**
      * Evaluator adapter instance
-     * 
+     *
      * @var \Elepunk\Evaluator\Contracts\AdapterInterface
      */
     protected $adapter;
 
     /**
      * Construct new evaluator instance
-     * 
+     *
      * @param \Symfony\Component\ExpressionLanguage\ExpressionLanguge $expression
      * @param \Elepunk\Evaluator\Contracts\AdapterInterface $adapter
-     * 
+     *
      * @return  void
      */
     public function __construct(ExpressionLanguage $expression, AdapterInterface $adapter)
@@ -58,10 +58,10 @@ class Evaluator implements EvaluatorInterface
      * {@inheritdoc}
      */
     public function evaluate($expression, $collection, Closure $callback = null)
-    {   
+    {
         $evaluate = $this->getExpressionEngine()->evaluate($expression, $collection);
 
-        if ( ! is_null($callback) && $evaluate ) {
+        if (! is_null($callback) && $evaluate) {
             return call_user_func($callback, $collection);
         }
 
@@ -77,7 +77,7 @@ class Evaluator implements EvaluatorInterface
 
         $evaluate = $this->evaluate($expression, $collection);
 
-        if ( ! is_null($callback) && $evaluate ) {
+        if (! is_null($callback) && $evaluate) {
             return call_user_func($callback, $collection);
         }
 
@@ -89,15 +89,15 @@ class Evaluator implements EvaluatorInterface
      */
     public function condition($expressionKey, $collection, Closure $callback = null)
     {
-        if ( ! $collection instanceof Collection ) {
+        if (! $collection instanceof Collection) {
             $collection = new Collection($collection);
         }
 
         $expression = $this->expression()->get($expressionKey);
 
-        if ( ! is_null($expression->rule)) {
+        if (! is_null($expression->rule)) {
             $evaluation = $this->evaluate($expression->rule, $collection->toArray());
-            if ( ! $evaluation) {
+            if (! $evaluation) {
                 return $collection;
             }
         }
@@ -106,7 +106,7 @@ class Evaluator implements EvaluatorInterface
         $collection->setCalculatedValue($result);
         $collection->put($expression->target, $result);
 
-        if ( ! is_null($callback)) {
+        if (! is_null($callback)) {
             return call_user_func($callback, $collection);
         }
 
@@ -115,7 +115,7 @@ class Evaluator implements EvaluatorInterface
 
     /**
      * Calculate the condition applied
-     * 
+     *
      * @param  \Illuminate\Support\Fluent $expression
      * @param  \Elepunk\Evaluator\Collection $collection
      * @return integer
@@ -140,7 +140,7 @@ class Evaluator implements EvaluatorInterface
         }
         
         $calculated = $this->evaluate("first {$operator} second", [
-            'first' => $target, 
+            'first' => $target,
             'second' => $value
         ]);
 
@@ -168,7 +168,7 @@ class Evaluator implements EvaluatorInterface
 
     /**
      * Extract the arithmetic operator from condition
-     * 
+     *
      * @param  string $input
      * @return string
      */
@@ -185,7 +185,7 @@ class Evaluator implements EvaluatorInterface
 
     /**
      * Extract the digits from condition
-     * 
+     *
      * @param  string $input
      * @return string
      */
@@ -198,7 +198,7 @@ class Evaluator implements EvaluatorInterface
 
     /**
      * Determine if condition is percentage
-     * 
+     *
      * @param  string  $input
      * @return boolean
      */

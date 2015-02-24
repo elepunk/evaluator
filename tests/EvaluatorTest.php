@@ -6,7 +6,7 @@ use Elepunk\Evaluator\Evaluator;
 use Elepunk\Evaluator\Collection;
 
 class EvaluatorTest extends \PHPUnit_Framework_TestCase
-{   
+{
     /**
      * @test
      */
@@ -213,7 +213,7 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($expected, $evaluator->condition('foo', $item));
 
-         $expression->shouldReceive('evaluate')
+        $expression->shouldReceive('evaluate')
             ->once()
             ->with('price > 50', $falseItem)
             ->andReturn(false);

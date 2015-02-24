@@ -4,6 +4,7 @@ filter:
     paths:
         - 'src/*'
     excluded_paths:
+        - 'build/*'
         - 'vendor/*'
         - 'tests/*'
 tools:

@@ -7,21 +7,21 @@ trait ExpressionCheckerTrait
 {
     /**
      * Available expressions
-     * 
+     *
      * @var array
      */
     protected $expressions = [];
 
     /**
      * Reserved keys for an expression
-     * 
+     *
      * @var array
      */
     protected $reservedKeys = ['target', 'action'];
 
     /**
      * Vaildate if expression contains the reserve keys
-     * 
+     *
      * @param  array $expression
      * @return boolean
      * @throws  \Elepunk\Evaluator\Exceptions\MissingKeyException

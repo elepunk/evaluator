@@ -6,21 +6,21 @@ interface EvaluatorInterface
 {
     /**
      * Get the Expression Engine instance
-     * 
+     *
      * @return \Symfony\Component\ExpressionLanguage\ExpressionLanguage
      */
     public function getExpressionEngine();
 
     /**
      * Get evaluator current adapter instance
-     * 
+     *
      * @return \Elepunk\Evaluator\Contracts\Adapter
      */
     public function expression();
 
     /**
      * Evaluate an expression using custom rule
-     * 
+     *
      * @param  string $expression
      * @param  mixed $item
      * @param  \Closure $callback
@@ -30,7 +30,7 @@ interface EvaluatorInterface
 
     /**
      * Evaluate an expression using stored rule
-     * 
+     *
      * @param  string $expressionKey
      * @param  mixed $item
      * @param  \Closure $callback

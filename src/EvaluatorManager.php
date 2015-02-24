@@ -7,7 +7,7 @@ class EvaluatorManager extends Manager
 {
     /**
      * Retrieve the default driver
-     * 
+     *
      * @return string
      */
     public function getDefaultDriver()
@@ -27,7 +27,7 @@ class EvaluatorManager extends Manager
 
     /**
      * Create memory adapter driver
-     * 
+     *
      * @return \Elepunk\Evaluator\Evaluator
      */
     public function createMemoryDriver()
