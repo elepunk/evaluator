@@ -1,7 +1,6 @@
 <?php namespace Elepunk\Evaluator\Contracts;
 
 use \Closure;
-use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 interface EvaluatorInterface
 {
