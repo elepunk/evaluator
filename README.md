@@ -25,7 +25,7 @@ Simpy update the ```composer.json``` file and run ```composer install```.
 
 ## Setup
 
-If you are using Orchestra Platform, you can simply enable the extension or add the service provider.
+If you are using Orchestra Platform, you can simply enable the extension or add the service provider. This will also load the ```Evaluator``` alias automatically.
 
 ```php
 'providers' => [
@@ -42,8 +42,6 @@ This package provide Orchesta Memory as the default driver.
 ### Evaluating an expression
 
 ```php
-use Elepunk\Evaluator\Facades\Evaluator;
-
 $test = [
     'foo' => 10,
     'bar' => 5
@@ -55,8 +53,6 @@ echo Evaluator::evaluate('foo > bar', $test); //this will return true
 You can also save the expression rule.
 
 ```php
-use Elepunk\Evaluator\Facades\Evaluator;
-
 $test = [
     'foo' => 10,
     'bar' => 5
@@ -64,7 +60,7 @@ $test = [
 
 Evaluator::expression()->add('test', 'foo > bar');
 
-echo Evaluator::evaluate('test', $test); //this will return true
+echo Evaluator::evaluateRule('test', $test); //this will return true
 ```
 
 For supported expressions, visit the [Symfony Expression Language Component](http://symfony.com/doc/current/components/expression_language/index.html).
@@ -74,8 +70,6 @@ For supported expressions, visit the [Symfony Expression Language Component](htt
 Let say we want to implement 10% tax to our collection.
 
 ```php
-use Elepunk\Evaluator\Facades\Evaluator;
-
 $item = [
     'price' => 100
 ];
