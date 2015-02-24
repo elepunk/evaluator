@@ -5,7 +5,7 @@ interface AdapterInterface
     /**
      * Load expressions from cache
      * 
-     * @return \Elepunk\Evaluator\Adapter\File
+     * @return \Elepunk\Evaluator\Contracts\AdapterInterface
      */
     public function load();
 
@@ -21,7 +21,7 @@ interface AdapterInterface
      * 
      * @param string $key
      * @param array  $expressions
-     * @return \Elepunk\Evaluator\Contracts\Adapter
+     * @return \Elepunk\Evaluator\Contracts\AdapterInterface
      */
     public function add($key, $evaluations);
 
@@ -38,7 +38,7 @@ interface AdapterInterface
      * Remove an expression
      * 
      * @param  string $key
-     * @return \Elepunk\Evaluator\Contracts\Adapter
+     * @return \Elepunk\Evaluator\Contracts\AdapterInterface
      */
     public function remove($key);
 
