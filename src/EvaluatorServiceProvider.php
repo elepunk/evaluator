@@ -24,21 +24,11 @@ class EvaluatorServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerManager();
+        $this->app->singleton('elepunk.evaluator', function ($app) {
+            return new EvaluatorManager($app);
+        });
 
         $this->registerFacade();
-    }
-
-    /**
-     * Register evaluator manager
-     *
-     * @return void
-     */
-    protected function registerManager()
-    {
-        $this->app->singleton('elepunk.evaluator', function () {
-            return new EvaluatorManager($this->app);
-        });
     }
 
     /**
