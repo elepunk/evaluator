@@ -1,6 +1,6 @@
 <?php namespace Elepunk\Evaluator\Contracts;
 
-interface Adapter
+interface AdapterInterface
 {
     /**
      * Load expressions from cache

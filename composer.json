@@ -26,5 +26,5 @@
 			"Elepunk\\Evaluator\\": "src/"
 		}
 	},
-	"mininum-stability": "stable"
+	"mininum-stability": "dev"
 }

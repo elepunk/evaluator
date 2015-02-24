@@ -1,10 +1,9 @@
 <?php namespace Elepunk\Evaluator\Contracts;
 
 use \Closure;
-use Elepunk\Evaluator\Contracts\Adapter;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
-interface Evaluator
+interface EvaluatorInterface
 {
     /**
      * Get the Expression Engine instance

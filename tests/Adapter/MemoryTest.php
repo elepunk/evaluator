@@ -19,7 +19,7 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
             'action' => '10%'
         ];
 
-        $memory = m::mock('\Orchestra\Contracts\Memory\Provider');
+        $memory = m::mock('\Orchestra\Memory\MemoryManager');
         $adapter = new Memory($memory);
 
         $this->assertEquals([], $adapter->expressions());
@@ -38,7 +38,7 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddMethod()
     {
-        $memory = m::mock('\Orchestra\Contracts\Memory\Provider');
+        $memory = m::mock('\Orchestra\Memory\MemoryManager');
         $adapter = new Memory($memory);
 
         $memory->shouldReceive('put')
@@ -58,6 +58,12 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
             ->with('elepunk_evaluator', ['foo' => 'foo > bar', 'bar' => new Fluent($stub)]);
 
         $this->assertInstanceOf('\Elepunk\Evaluator\Adapter\Memory', $adapter->add('bar', $stub));
+
+        $memory->shouldReceive('put')
+            ->once()
+            ->with('elepunk_evaluator', ['foo' => 'foo < bar', 'bar' => new Fluent($stub)]);
+
+        $this->assertInstanceOf('\Elepunk\Evaluator\Adapter\Memory', $adapter->add('foo', 'foo < bar'));
     }
 
     /**
@@ -67,7 +73,7 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
     {
         $stub = [];
 
-        $memory = m::mock('\Orchestra\Contracts\Memory\Provider');
+        $memory = m::mock('\Orchestra\Memory\MemoryManager');
         $adapter = new Memory($memory);
 
         $adapter->add('foo', $stub);
@@ -81,7 +87,7 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
             'rule' => 'foo > 100'
         ];
 
-        $memory = m::mock('\Orchestra\Contracts\Memory\Provider');
+        $memory = m::mock('\Orchestra\Memory\MemoryManager');
         $adapter = new Memory($memory);
 
         $memory->shouldReceive('put')
@@ -98,7 +104,7 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMethodThrowException()
     {
-        $memory = m::mock('\Orchestra\Contracts\Memory\Provider');
+        $memory = m::mock('\Orchestra\Memory\MemoryManager');
         $adapter = new Memory($memory);
 
         $adapter->get('foobar');
@@ -112,7 +118,7 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
             'action' => '10%'
         ];
 
-        $memory = m::mock('\Orchestra\Contracts\Memory\Provider');
+        $memory = m::mock('\Orchestra\Memory\MemoryManager');
         $adapter = new Memory($memory);
 
         $memory->shouldReceive('put')

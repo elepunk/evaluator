@@ -36,7 +36,7 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase
 
         $evaluator = new Evaluator($expression, $adapter);
 
-        $this->assertInstanceOf('\Elepunk\Evaluator\Contracts\Adapter', $evaluator->expression());
+        $this->assertInstanceOf('\Elepunk\Evaluator\Contracts\AdapterInterface', $evaluator->expression());
     }
 
     /**
@@ -385,7 +385,7 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase
     protected function getMockDependencies()
     {
         $expression = m::mock('\Symfony\Component\ExpressionLanguage\ExpressionLanguage');
-        $adapter = m::mock('\Elepunk\Evaluator\Contracts\Adapter');
+        $adapter = m::mock('\Elepunk\Evaluator\Contracts\AdapterInterface');
 
         return [$expression, $adapter];
     }

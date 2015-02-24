@@ -2,11 +2,11 @@
 
 use Illuminate\Support\Fluent;
 use Illuminate\Support\Arr as A;
-use Elepunk\Evaluator\Contracts\Adapter;
+use Elepunk\Evaluator\Contracts\AdapterInterface;
 use Elepunk\Evaluator\Traits\ExpressionCheckerTrait;
 use Elepunk\Evaluator\Exceptions\MissingExpressionException;
 
-class Memory implements Adapter
+class Memory implements AdapterInterface
 {
     use ExpressionCheckerTrait;
 

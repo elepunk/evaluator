@@ -4,8 +4,8 @@ use \Closure;
 use Illuminate\Support\Fluent;
 use Elepunk\Evaluator\Collection;
 use Illuminate\Support\Str as S;
-use Elepunk\Evaluator\Contracts\Adapter;
-use Elepunk\Evaluator\Contracts\Evaluator as EvaluatorInterface;
+use Elepunk\Evaluator\Contracts\AdapterInterface;
+use Elepunk\Evaluator\Contracts\EvaluatorInterface;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 class Evaluator implements EvaluatorInterface
@@ -32,7 +32,7 @@ class Evaluator implements EvaluatorInterface
      * 
      * @return  void
      */
-    public function __construct(ExpressionLanguage $expression, Adapter $adapter)
+    public function __construct(ExpressionLanguage $expression, AdapterInterface $adapter)
     {
         $this->expressionEngine = $expression;
         $this->adapter = $adapter;
