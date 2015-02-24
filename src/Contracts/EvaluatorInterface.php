@@ -7,7 +7,7 @@ interface EvaluatorInterface
     /**
      * Get the Expression Engine instance
      * 
-     * @return \Symfony\Component\ExpressionLanguge\ExpressionLanguage
+     * @return \Symfony\Component\ExpressionLanguage\ExpressionLanguage
      */
     public function getExpressionEngine();
 

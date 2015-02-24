@@ -20,7 +20,7 @@ class Evaluator implements EvaluatorInterface
     /**
      * Evaluator adapter instance
      * 
-     * @var \Elepunk\Evaluator\Contracts\Adapter
+     * @var \Elepunk\Evaluator\Contracts\AdapterInterface
      */
     protected $adapter;
 
@@ -28,7 +28,7 @@ class Evaluator implements EvaluatorInterface
      * Construct new evaluator instance
      * 
      * @param \Symfony\Component\ExpressionLanguage\ExpressionLanguge $expression
-     * @param \Elepunk\Evaluator\Contracts\Adapter $adapter
+     * @param \Elepunk\Evaluator\Contracts\AdapterInterface $adapter
      * 
      * @return  void
      */
@@ -57,12 +57,12 @@ class Evaluator implements EvaluatorInterface
     /**
      * {@inheritdoc}
      */
-    public function evaluate($expression, $item, Closure $callback = null)
+    public function evaluate($expression, $collection, Closure $callback = null)
     {   
-        $evaluate = $this->getExpressionEngine()->evaluate($expression, $item);
+        $evaluate = $this->getExpressionEngine()->evaluate($expression, $collection);
 
         if ( ! is_null($callback) && $evaluate ) {
-            return call_user_func($callback, $item);
+            return call_user_func($callback, $collection);
         }
 
         return $evaluate;
@@ -71,14 +71,14 @@ class Evaluator implements EvaluatorInterface
     /**
      * {@inheritdoc}
      */
-    public function evaluateRule($expressionKey, $item, Closure $callback = null)
+    public function evaluateRule($expressionKey, $collection, Closure $callback = null)
     {
         $expression = $this->expression()->get($expressionKey);
 
-        $evaluate = $this->evaluate($expression, $item);
+        $evaluate = $this->evaluate($expression, $collection);
 
         if ( ! is_null($callback) && $evaluate ) {
-            return call_user_func($callback, $item);
+            return call_user_func($callback, $collection);
         }
 
         return $evaluate;
@@ -87,10 +87,10 @@ class Evaluator implements EvaluatorInterface
     /**
      * {@inheritdoc}
      */
-    public function condition($expressionKey, $item, Closure $callback = null)
+    public function condition($expressionKey, $collection, Closure $callback = null)
     {
-        if ( ! $item instanceof Collection ) {
-            $collection = new Collection($item);
+        if ( ! $collection instanceof Collection ) {
+            $collection = new Collection($collection);
         }
 
         $expression = $this->expression()->get($expressionKey);
@@ -117,18 +117,18 @@ class Evaluator implements EvaluatorInterface
      * Calculate the condition applied
      * 
      * @param  \Illuminate\Support\Fluent $expression
-     * @param  \Elepunk\Evaluator\Collection $item
+     * @param  \Elepunk\Evaluator\Collection $collection
      * @return integer
      */
-    protected function calculate(Fluent $expression, Collection $item)
+    protected function calculate(Fluent $expression, Collection $collection)
     {
-        $target = $item->get($expression->target);
-        $item->setOriginalValue($target);
+        $target = $collection->get($expression->target);
+        $collection->setOriginalValue($target);
 
         $action = $expression->action;
 
         $operator = $this->getArithmeticOperator($action);
-        $target = $this->isMutiplying($expression, $item);
+        $target = $this->isMutiplying($expression, $collection);
 
         $value = $this->getCalculationValue($expression->action);
 
@@ -151,18 +151,18 @@ class Evaluator implements EvaluatorInterface
      * Determine if condition has multiplier
      *
      * @param  \Illuminate\Support\Fluent $expression
-     * @param  \Elepunk\Evaluator\Collection $item
+     * @param  \Elepunk\Evaluator\Collection $collection
      * @return integer
      */
-    protected function isMutiplying(Fluent $expression, Collection $item)
+    protected function isMutiplying(Fluent $expression, Collection $collection)
     {
         if (is_null($expression->multiplier)) {
-            return $item->get($expression->target);
+            return $collection->get($expression->target);
         }
 
         return $this->evaluate("value * multiplier", [
-            'value' => $this->getCalculationValue($item->get($expression->target)),
-            'multiplier' => $item->get($expression->multiplier)
+            'value' => $this->getCalculationValue($collection->get($expression->target)),
+            'multiplier' => $collection->get($expression->multiplier)
         ]);
     }
 

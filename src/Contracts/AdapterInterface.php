@@ -29,7 +29,7 @@ interface AdapterInterface
      * Retrieve an expression
      * 
      * @param  string $key
-     * @return \Illuminate\Support\Fluent
+     * @return mixed
      * @throws  \Elepunk\Evaluator\Exceptions\MissingExpressionException
      */
     public function get($key);
